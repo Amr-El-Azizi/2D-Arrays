@@ -2,8 +2,8 @@ public class TwoDArray_Assignments
 {
     public TwoDArray_Assignments()
     {
-        int arr[][] = {{4,2}, { 6,2}  , {3,5} };
-        System.out.println(maxVal_inRow(arr,2));
+        int arr[][] = {{1,2}, { 3,4}  , {5,6} };
+        print(invertValues(arr));
     }
     
     public void printRow(int[][] arr, int row)
@@ -64,7 +64,7 @@ public class TwoDArray_Assignments
     
     public int maxVal_inRow(int[][] arr, int row)
     {
-        int temp = 0;
+        int temp = arr[row][0];
         if(arr.length < row)
         {
             if(arr[row].length > 0)
@@ -84,12 +84,55 @@ public class TwoDArray_Assignments
     
     public int maxVal(int[][] arr, int col)
     {
-        int temp = 0;
+        int temp = arr[0][col];
         for(int row = 0; row < arr.length; row ++)
         {
             if(arr[row].length < col && arr[row][col] > temp)
             temp = arr[row][col];
         }
         return temp;
+    }
+    
+    public int[][] changeValues(int[][] table, int val)
+    {
+        for(int row = 0; row < table.length; row ++)
+        {
+            for(int col = 0; col < table[row].length; col ++)
+            table[row][col] = val;
+        }
+        return table;
+    }
+    
+    int[] twoD_to1D(int[][] arr)
+    {
+        int count = 0;
+        for(int row = 0; row < arr.length; row ++)
+        {
+            for(int col = 0; col < arr[row].length; col ++)
+            count ++;
+        }
+        int[] nums = new int[count];
+        int i = 0;
+        for(int row = 0; row < arr.length; row ++)
+        {
+            for(int col = 0; col < arr[row].length; col ++)
+            {
+                nums[i] = arr[row][col];
+                i++;
+            }
+        }
+        return nums;
+    }
+    
+    public int[][] invertValues(int[][] matr)
+    {
+        int ml = matr.length;
+        int[][] arr = new int[ml][matr[0].length];
+        for(int row = 0; row < ml; row ++)
+        {
+            for(int col = 0; col < matr[row].length; col ++)
+            arr[row][col] = matr[ml-row-1][matr[row].length-col-1];
+        }
+        return arr;
     }
 }
